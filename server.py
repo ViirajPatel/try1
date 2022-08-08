@@ -1,7 +1,8 @@
 from skimage import io, color
 from numpy import average
-import json
+from json import dumps
 from flask import Flask,  request
+from werkzeug.serving import WSGIRequestHandler
 app = Flask(__name__)
 
 
@@ -20,7 +21,7 @@ def upload():
         val = {
             'message':str(organic_c)
         }
-        return json.dumps(val)
+        return dumps(val)
 
 if __name__ == "__main__":
     app.run(debug=False,port='8000')
