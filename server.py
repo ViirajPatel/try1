@@ -1,9 +1,7 @@
 from skimage import io, color
-import numpy as np
-
+from numpy import average
 import json
 from flask import Flask,  request
-from werkzeug.serving import WSGIRequestHandler
 app = Flask(__name__)
 
 
@@ -14,13 +12,9 @@ def home():
 def upload():
     if(request.method=="POST"):
         imagefile = request.files['image']
-       
-        # npimg = np.fromstring(imagefile, np.uint8)
-       
-        # img = imdecode(npimg, IMREAD_UNCHANGED)
         img = io.imread(imagefile)
         lab = color.rgb2lab(img)
-        lightness_avg = np.average(lab[0])
+        lightness_avg = average(lab[0])
         organic_c = 10.44-0.1998*lightness_avg
         print(organic_c)
         val = {
