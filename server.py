@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Hello!!"
+    return "Hello from Viraj...!!!"
 @app.route('/upload', methods=['POST'])
 def upload():
     if(request.method=="POST"):
