@@ -13,8 +13,6 @@ def home():
 def upload():
     if(request.method=="POST"):
         print(request.content_length)
-        typeofsoil = request.form.get('soiltype')
-        print(typeofsoil)
         lightness_avg = average(color.rgb2lab(io.imread(request.files['image']))[0])
         organic_c = 10.44-0.1998*lightness_avg
         print(organic_c)
