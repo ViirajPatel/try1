@@ -1,3 +1,4 @@
+from ctypes import sizeof
 from skimage import io, color
 from numpy import average
 from json import dumps
@@ -12,7 +13,7 @@ def home():
 @app.route('/upload', methods=['POST'])
 def upload():
     if(request.method=="POST"):
-         
+        print(request.content_length)
         typeofsoil = request.form.get('soiltype')
         print(typeofsoil)
         lightness_avg = average(color.rgb2lab(io.imread(request.files['image']))[0])
