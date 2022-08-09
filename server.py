@@ -13,14 +13,14 @@ def home():
 def upload():
     if(request.method=="POST"):
         imagefile = request.files['image']
-        typeofsoil = request.form.get('soiltype').split(".")[1]
+        typeofsoil = request.form.get('soiltype')
         print(typeofsoil)
         img = io.imread(imagefile)
         lab = color.rgb2lab(img)
         lightness_avg = average(lab[0])
-        if(typeofsoil=="mid"):
+        if(typeofsoil=="soiltype.mid"):
             organic_c = 10.44-0.1998*lightness_avg
-        elif(typeofsoil=="coarse"):
+        elif(typeofsoil=="soiltype.coarse"):
             organic_c= 9.16-0.163 * lightness_avg
         else:
             organic_c = 7.241 - 0.1342 * lightness_avg
