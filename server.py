@@ -1,4 +1,3 @@
-from ctypes import sizeof
 from skimage import io, color
 from numpy import average
 from json import dumps
