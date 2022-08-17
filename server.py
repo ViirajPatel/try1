@@ -12,9 +12,19 @@ def home():
 @app.route('/upload', methods=['POST'])
 def upload():
     if(request.method=="POST"):
-        print(request.content_length)
-        lightness_avg = average(color.rgb2lab(io.imread(request.files['image']))[0])
-        organic_c = 10.44-0.1998*lightness_avg
+        imagefile = request.files['image']
+        typeofsoil = request.form.get('soiltype').split(".")[1]
+        print(typeofsoil)
+        img = io.imread(imagefile)
+        lab = color.rgb2lab(img)
+        lightness_avg = average(lab[0])
+        if(typeofsoil=="mid"):
+            organic_c = 10.44-0.1998*lightness_avg
+        elif(typeofsoil=="coarse"):
+            organic_c= 9.16-0.163 * lightness_avg
+        else:
+            organic_c = 7.241 - 0.1342 * lightness_avg
+
         print(organic_c)
         val = {
             'message':str(organic_c)
